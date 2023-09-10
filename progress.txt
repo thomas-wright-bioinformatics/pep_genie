@@ -1,0 +1,6 @@
+Managed to authenticate to github.
+It worked when I used gh to authenticate by ssh and a token. 
+Then I initialised the repo
+then pushed, then asked me to login. 
+Seemed to work fine/ 
+Next I need to set up PA to read website. 
