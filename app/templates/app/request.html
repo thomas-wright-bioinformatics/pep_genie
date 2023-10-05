@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>pep genie index</title>
+    </head>
+    <body>
+        <div class="my-body" style='background-color: white; display:flex; justify-content:center'>
+            <div style='display: flex; flex-direction: column; justify-content:flex-start;clear: both;'>
+
+                <form method="POST" action='{% url "app:validate" %}' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+
+                    {{ form.img_test.label }}<br>
+                    {{ form.img_test }}<br><br>
+
+                    {{ form.img_con.label }}<br>
+                    {{ form.img_con }}<br><br>
+
+                    <label for="checkbox">Upload a UV/Vis positive control?</label>
+                    <input type="checkbox" id="vis-checkbox">
+
+                    <div style='display: none; margin-left: 60px' id='vis-div'>
+                        {{ form.img_vis.label }}<br>
+                        {{ form.img_vis }}<br>
+                    </div>
+                    <div id='vis-spacer'>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+
+                    {{ form.cols.label }}
+                    {{ form.cols }}<br>
+                    {{ form.first_col.label }}
+                    {{ form.first_col }}<br>
+                    {{ form.strip_request.label }}
+                    {{ form.strip_request }}<br>
+                    {{ form.norm.label }}
+                    {{ form.norm }}<br>
+
+                    <button type="submit" class="">Save</button>
+
+                </form>
+                <div class='seven-logo'>
+                    <img src="{% static '/app/img/george-genie.png'%}" style='width:400px' id="" alt="">
+                </div>
+            </div>
+        </div>
+
+
+    <script>
+        // Get references to the checkbox and the div
+        const checkbox = document.getElementById('vis-checkbox');
+        const divToShow = document.getElementById('vis-div');
+        const divToHide = document.getElementById('vis-spacer');
+
+        checkbox.checked = false;
+
+        // Add an event listener to the checkbox
+        checkbox.addEventListener('change', function() {
+            // Check if the checkbox is checked
+            if (checkbox.checked) {
+                // If checked, hide the div by setting its display property to 'none'
+                divToShow.style.display = 'block';
+                divToHide.style.display = 'none';
+            } else {
+                // If unchecked, show the div by setting its display property to 'block'
+                divToShow.style.display = 'none';
+                divToHide.style.display = 'block';
+            }
+        });
+    </script>
+
+    </body>
+</html>

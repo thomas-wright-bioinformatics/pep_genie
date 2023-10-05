@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    
+
+
+<div style='display:flex; flex-direction:column; justify-content:flex-start;'>
+    <div style='display:flex; justify-content:space-between;'>
+        <div style='display: block; margin: 10px;'>
+            <label for='this_array'>Download Analysis Files: </label>
+            <button id='this_col'>
+                <a href="{% url 'app:file_download' %}" style='text-decoration:none; color:black;'> Download</a>
+            </button>
+        </div>
+    </div>
+    <div class='seven-logo'>
+        <img src="{% static '/app/img/george-genie.png'%}" style='width:400px' id="" alt="">
+    </div>
+</div>
+
+
+
+
+</html>

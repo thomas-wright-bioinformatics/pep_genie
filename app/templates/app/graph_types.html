@@ -1,0 +1,120 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    
+    <div id='vis-div' style='display:block; margin-left: 60px'>
+        <br>
+        {% for item in my_list %}
+            <label style='display:flex; align-items: center;'>
+                {{ item }}
+
+                <input type="radio" name="radio_group_{{ forloop.counter }}" value="v" checked> 
+                <div style='display: inline'>
+                    <img src="{% static '/app/img/array-icon-vert.png'%}" style='width:60px' id="" alt="">
+                </div>
+
+                <input type="radio" name="radio_group_{{ forloop.counter }}" value="h"> 
+                <div style='display: inline'>
+                    <img src="{% static '/app/img/array-icon-hoz.png'%}" style='width:60px' id="" alt="">
+                </div>
+
+            </label><br>
+        {% endfor %}
+
+    </div>
+    <form id="hiddenForm" action="{% url 'app:switchboard'%}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" id="hiddenField" value="empty u" name='hiddenField'>
+        <div id='div-to-hide'>
+            <button onclick='exportGraphTypes()' style='margin-top:3px; height:20px; font-size: 12pt; position:fixed; background-color:#d1e0e0;border-radius: 5px;'>Submit</button>
+        </div>
+        <div style='display:none' id='vis-div-form'>
+            <p1>Would you like the y axis limits to be the same for each graph?</pr><br>
+            <p1>(This can be useful for discovery arrays where you want to compare between strips)</br>
+            <input type='submit' onclick='addD()' value='Yes'>
+            <input type='submit' onclick='keepTypes()' value='No'>
+        </div>
+    </form>
+    <div id='vis-spacer'>
+        <br><br><br><br><br><br><br>
+    </div>
+
+
+    
+
+
+    
+
+    <script>
+        function exportGraphTypes(){
+
+            let types_list = [];
+            
+
+            {% for item in my_list %}
+                var radioButtons = document.getElementsByName("radio_group_{{ forloop.counter }}");
+                for (var i = 0; i < radioButtons.length; i++) {
+                    if (radioButtons[i].checked) {
+                        types_list.push(radioButtons[i].value)
+                    };
+                };
+            {% endfor %}
+
+            var hiddenField = document.getElementById('hiddenField');
+            hiddenField.value = types_list;
+
+            var allAreVs = types_list.every(function(element) {
+                return element === 'v';
+            });
+
+            var my_form = document.getElementById('hiddenForm')
+            var visDivForm = document.getElementById('vis-div-form')
+            var divToHide = document.getElementById('div-to-hide')
+            var visDiv = document.getElementById('vis-div')
+            if (allAreVs) {
+                event.preventDefault();
+                visDivForm.style.display = 'block';
+                divToHide.style.display = 'none';
+                visDiv.style.display = 'none';
+            } else{
+                my_form.submit()
+            }
+
+
+        };
+        function addD(){
+            var hiddenField = document.getElementById('hiddenField');
+            hiddenField.value = 'd';
+        }
+        
+        function keepTypes(){
+
+            let types_list = [];
+            
+
+            {% for item in my_list %}
+                var radioButtons = document.getElementsByName("radio_group_{{ forloop.counter }}");
+                for (var i = 0; i < radioButtons.length; i++) {
+                    if (radioButtons[i].checked) {
+                        types_list.push(radioButtons[i].value)
+                    };
+                };
+            {% endfor %}
+
+            var hiddenField = document.getElementById('hiddenField');
+            hiddenField.value = types_list;
+
+            var my_form = document.getElementById('hiddenForm')
+
+            my_form.submit()
+            
+
+        };
+
+
+    </script>
+
+
+
+</html>
