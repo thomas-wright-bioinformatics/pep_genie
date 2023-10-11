@@ -1,0 +1,52 @@
+
+<div class="">
+
+    <h1>Sequence Studies</h1>
+
+    <form action="{% url 'app:ss_result' %}" method='POST'>
+        {% csrf_token %}
+
+        <div class="">
+            <h1>Enter Sequence:</h1>
+            <input class="" type="text" name="enter-sequence" id="enter-sequence" value='ACDEFGHIKLMNPQRST'>
+
+            <h1>Select Experiments:</h1>
+                <ul class="">
+                    <li class="">
+                        <label for="ala-scan">Alanine Scan:</label>
+                        <input type="checkbox" name="ala-scan" id="ala-scan" value='true'>
+                    </li>
+                    <li>
+                        <label for="n-trunc">N-Terminal Truncation:</label>
+                        <input type="checkbox" name="n-trunc" id="n-trunc" value='true'>
+                    </li>
+                    <li>
+                        <label for="c-trunc">C-Terminal Truncation:</label>
+                        <input type="checkbox" name="c-trunc" id="c-trunc" value='true'>
+                    </li>
+                    <li>
+                        <label for="n-c-trunc">N- & C-Terminal Truncation:</label>
+                        <input type="checkbox" name="n-c-trunc" id="n-c-trunc" value='true'>
+                    </li>
+                    <li>
+                        <label for="point-sub">Point Substitutions:</label>
+                        <input type="checkbox" name="point-sub" id="point-sub" value='true'>
+                    </li>
+                </ul>
+      
+                <input type="checkbox" name="m-notation" id="m-notation" value='true' checked style='display:none;'>
+                <input type="submit" value="Submit">
+
+            <!--    
+            <h1>Notation Options:</h1>
+                <div class="s3" style='display:hidden;'>
+                    <label for="m-notation">Multipep ".space" Notation?&nbsp;</label> 
+                </div>
+            <div style="display: flex; justify-content: center;">
+            </div>
+            -->
+        </div>
+    </form>
+</div>
+
+

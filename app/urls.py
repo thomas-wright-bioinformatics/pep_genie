@@ -11,5 +11,7 @@ urlpatterns = [
     path('switchboard',views.switchboard, name = 'switchboard'),
     path('download',views.download, name = 'download'),
     path('grid_result',views.grid_result, name = 'grid_result'),
-    path('file_download',views.file_download, name = 'file_download')
+    path('file_download',views.file_download, name = 'file_download'),
+    path('ss_form',views.ss_form, name = 'ss_form'),
+    path('ss_result',views.ss_result, name = 'ss_result')
 ]

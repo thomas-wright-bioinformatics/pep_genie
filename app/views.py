@@ -3,6 +3,7 @@ from datetime import datetime
 from .models import gridModel
 from .forms import gridModelForm
 from .pytools import *
+from .seq_studies import *
 from django.conf import settings
 import os
 import cv2
@@ -23,6 +24,8 @@ MEDIA_ROOT = settings.MEDIA_ROOT
 
 
 def index(request):
+    print(np.__version__)
+    print(cv2.__version__)
     return render(request, 'app/index.html',{})
 
 # Create your views here.
@@ -138,6 +141,12 @@ def switchboard(request):
             graph_types = request.POST.get('hiddenField')
         graph_types.replace(' ','')
         graph_types = graph_types.split(',')
+
+        if 'd' in graph_types:
+            new_list = []
+            for i in range(len(my_model.strip_request)):
+                new_list.append('d')
+            graph_types = new_list
         my_model.graph_types = graph_types
         my_model.config = "{'c':1}"
         my_model.save()
@@ -674,3 +683,63 @@ def file_download(request):
             return response
 
     raise Http404
+
+
+
+
+
+
+
+def ss_form(request):
+    return render(request, 'app/ss_form.html', {})
+
+def ss_result(request):
+    res=''
+    seq = request.POST.get('enter-sequence').upper()
+    m_notation_box = request.POST.get('m-notation')
+
+    ala_box = request.POST.get('ala-scan')
+    if ala_box == 'true':
+        res += ala_scan(seq)
+        res += '\n'
+        if m_notation_box == 'true':
+            res += '.space'
+            res += '\n'
+            res += '\n'
+
+    n_trunc_box = request.POST.get('n-trunc')
+    if n_trunc_box == 'true':
+        res += n_trunc(seq)
+        res += '\n'
+        if m_notation_box == 'true':
+            res += '.space'
+            res += '\n'
+            res += '\n'
+
+    c_trunc_box = request.POST.get('c-trunc')
+    if c_trunc_box == 'true':
+        res += c_trunc(seq)
+        res += '\n'
+        if m_notation_box == 'true':
+            res += '.space'
+            res += '\n'
+            res += '\n'
+
+    n_c_trunc_box = request.POST.get('n-c-trunc')
+    if n_c_trunc_box == 'true':
+        res += n_c_trunc(seq)
+        res += '\n'
+        if m_notation_box == 'true':
+            res += '.space'
+            res += '\n'
+            res += '\n'
+
+    point_sub_box = request.POST.get('point-sub')
+    if point_sub_box == 'true':
+        res += point_sub(seq)
+        res += '\n'
+        if m_notation_box == 'true':
+            res += '.space'
+            res += '\n'
+            res += '\n'
+    return render(request, "app/ss_result.html", {"result":res})
