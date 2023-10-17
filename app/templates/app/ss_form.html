@@ -1,5 +1,8 @@
 
-<div class="">
+{% extends 'app/base-main.html' %}
+{% load static %}
+{% block content %}
+
 
     <h1>Sequence Studies</h1>
 
@@ -33,7 +36,7 @@
                         <input type="checkbox" name="point-sub" id="point-sub" value='true'>
                     </li>
                 </ul>
-      
+    
                 <input type="checkbox" name="m-notation" id="m-notation" value='true' checked style='display:none;'>
                 <input type="submit" value="Submit">
 
@@ -47,6 +50,6 @@
             -->
         </div>
     </form>
-</div>
+        
 
-
+{% endblock %}

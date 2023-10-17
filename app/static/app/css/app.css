@@ -1,0 +1,46 @@
+
+body{
+    font-family:  Helvetica, Verdana, Arial,  sans-serif;
+}
+
+
+button {
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight:bold;
+    border: 2px solid white;
+    background:rgba(250, 250, 250, 0.3);
+    color:white;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    font-size:16pt;
+}
+
+span{
+    background:#0099ad;
+    height:100%;
+    width:0%;
+    border-radius:25px;
+    position:absolute;
+    left:0;
+    bottom:0;
+    z-index:-1;
+    transition: 0.2s;
+
+}
+
+button:hover span{
+    width:100%;
+}
+button:hover {
+    border:none;
+}
+
+
+div.submit-text p {
+    margin: 0;
+}

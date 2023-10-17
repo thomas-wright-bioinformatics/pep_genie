@@ -1,57 +1,47 @@
+
+{% extends 'app/base-main.html' %}
 {% load static %}
+{% block content %}
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>pep genie index</title>
-    </head>
-    <body style='background-color: rgb(228, 228, 228);padding: 0 12px 12px 12px;min-height:100vh;'>
-       
-        <div style='height:20px;color:white;background-color:white;'>
+    <form style='position:relative;' method="POST" action='{% url "app:validate" %}' enctype="multipart/form-data">
+        {% csrf_token %}
+        
+
+        {{ form.img_test.label }}<br>
+        {{ form.img_test }}<br><br>
+
+        {{ form.img_con.label }}<br>
+        {{ form.img_con }}<br><br>
+
+        <label for="checkbox">Upload a UV/Vis positive control?</label>
+        <input type="checkbox" id="vis-checkbox">
+
+        <div style='display: none; margin-left: 60px' id='vis-div'>
+            {{ form.img_vis.label }}<br>
+            {{ form.img_vis }}<br>
         </div>
-        <div class="my-body" style='background-color: white; display:flex; justify-content:center'>
-            <div style='display: flex; flex-direction: column; justify-content:flex-start;clear: both;'>
-
-                <form method="POST" action='{% url "app:validate" %}' enctype="multipart/form-data">
-                    {% csrf_token %}
-                    
-
-                    {{ form.img_test.label }}<br>
-                    {{ form.img_test }}<br><br>
-
-                    {{ form.img_con.label }}<br>
-                    {{ form.img_con }}<br><br>
-
-                    <label for="checkbox">Upload a UV/Vis positive control?</label>
-                    <input type="checkbox" id="vis-checkbox">
-
-                    <div style='display: none; margin-left: 60px' id='vis-div'>
-                        {{ form.img_vis.label }}<br>
-                        {{ form.img_vis }}<br>
-                    </div>
-                    <div id='vis-spacer'>
-                        <br>
-                        <br>
-                        <br>
-                    </div>
-
-                    {{ form.cols.label }}
-                    {{ form.cols }}<br>
-                    {{ form.first_col.label }}
-                    {{ form.first_col }}<br>
-                    {{ form.strip_request.label }}
-                    {{ form.strip_request }}<br>
-                    {{ form.norm.label }}
-                    {{ form.norm }}<br>
-
-                    <button type="submit" class="">Save</button>
-
-                </form>
-                <div class='seven-logo'>
-                    <img src="{% static '/app/img/george-genie.png'%}" style='width:400px' id="" alt="">
-                </div>
-            </div>
+        <div id='vis-spacer'>
+            <br>
+            <br>
+            <br>
         </div>
+
+        {{ form.cols.label }}
+        {{ form.cols }}<br>
+        {{ form.first_col.label }}
+        {{ form.first_col }}<br>
+        {{ form.strip_request.label }}
+        {{ form.strip_request }}<br>
+        {{ form.norm.label }}
+        {{ form.norm }}<br>
+
+        <button type="submit" class="">Save</button>
+
+    </form>
+    <div class='seven-logo'>
+        <img src="{% static '/app/img/george-genie.png'%}" style='width:250px' id="" alt="">
+    </div>
+
 
 
     <script>
@@ -77,5 +67,4 @@
         });
     </script>
 
-    </body>
-</html>
+{% endblock %}

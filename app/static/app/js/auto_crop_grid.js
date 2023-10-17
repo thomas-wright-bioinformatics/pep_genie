@@ -126,7 +126,7 @@ function beginDrawing(canvas){
 };
 
 
-function saveCoordsSubmit() {
+function saveCoordsSubmit() {  
     let grid = document.getElementById('grid-div');
     let gridRect = grid.getBoundingClientRect()
     let canvas = document.getElementById('align-canvas');

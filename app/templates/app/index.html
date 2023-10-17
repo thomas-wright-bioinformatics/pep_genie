@@ -1,23 +1,25 @@
+{% extends 'app/base-index.html' %}
 {% load static %}
+{% block content %}
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>pep genie index</title>
-    </head>
-    <body style='color:white;background-color: rgb(228, 228, 228);padding: 0 12px 12px 12px;min-height:100vh;'>
-        <div class="my-body" style='background-color: white; display:flex; justify-content:center'>
-            <div style='display: flex; flex-direction: column; justify-content:flex-start;clear: both;'>
 
-                <div>
-                    <img src="{% static '/app/img/BANNER 2 - logo - low res.png'%}" style='width:500px' id="" alt="">
-                </div>
-                <h4>Where would you like to go?</h4>
-                <a href="{% url 'app:request' %}" style="text-align: center; text-decoration:none; color:black; padding: 14px 28px; border: 2px solid black; border-radius: 25px;"> Peptide Array Analysis</a>
-                <a href="{% url 'app:ss_form' %}" style="text-align: center; text-decoration:none; color:black; padding: 14px 28px; border: 2px solid black; border-radius: 25px; margin-top:7px;"> Alanine Scan and Truncations</a>
-                <div style='height:20px;color:white;'>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+
+    <div class='title' style='color:white; text-align:center; height: 20vh;'>   
+        <h1 style='font-size:64pt; margin:0'>The Pep Genie</h1>
+        <p style='font-size:12pt;'>Version 4.2: Sashimi</p>
+    </div>
+
+    <div class='menu'>
+        <a href="{% url 'app:request' %}">
+            <button type='button'><span></span>Peptide Array Analysis</button>
+        </a>
+        <a href="{% url 'app:ss_form' %}">
+            <button type='button'><span></span>Alanine Scan and Truncations</button>
+        </a>
+    </div>
+
+
+
+
+
+{% endblock %}

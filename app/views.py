@@ -131,89 +131,112 @@ def graph_types(request):
 
 
 
-def switchboard(request):
+
+
+
+def grid_test(request):
 
     my_model = gridModel.objects.all().order_by('-id')[0]
-    c = ast.literal_eval(my_model.config)['c']
 
-    if c == 0:
-        if request.method == 'POST':
-            graph_types = request.POST.get('hiddenField')
-        graph_types.replace(' ','')
-        graph_types = graph_types.split(',')
+    graph_types = request.POST.get('hiddenField')
+    graph_types.replace(' ','')
+    graph_types = graph_types.split(',')
 
-        if 'd' in graph_types:
-            new_list = []
-            for i in range(len(my_model.strip_request)):
-                new_list.append('d')
-            graph_types = new_list
-        my_model.graph_types = graph_types
-        my_model.config = "{'c':1}"
-        my_model.save()
+    if 'd' in graph_types:
+        new_list = []
+        for i in range(len(my_model.strip_request)):
+            new_list.append('d')
+        graph_types = new_list
+    my_model.graph_types = graph_types
+    my_model.save()
+    header = 'Test Array'
+    context = {'my_model':my_model,'img':my_model.img_test,'header':header}
+    return render(request, 'app/grid_test.html',context) 
+
+
+def grid_con(request):    
+    my_model = gridModel.objects.all().order_by('-id')[0]
+
+    x1 = float(request.POST.get('coordX1'))
+    x2 = float(request.POST.get('coordX2'))
+    y1 = float(request.POST.get('coordY1'))
+    y2 = float(request.POST.get('coordY2'))
+
+    #check if test grid was not drawn. C set to 1 before template. 
+    if x1 == x2:
+        print('grid not drawn after test array. Sending back')
         header = 'Test Array'
         context = {'my_model':my_model,'img':my_model.img_test,'header':header}
-        return render(request, 'app/grid.html',context) 
+        return render(request, 'app/grid_test.html',context) 
+    else:
+        print('grid drawn')
+        print('x',x1)
+        print('x',x2)
+    canvas_width = float(request.POST.get('canvas_width'))
+    canvas_height = float(request.POST.get('canvas_height'))
+    my_coords = [x1,y1,x2,y2]
+    my_model.img_test_coords = my_coords
 
-    elif c == 1:
-        #save coords
-        x1 = float(request.POST.get('coordX1'))
-        y1 = float(request.POST.get('coordY1'))
-        x2 = float(request.POST.get('coordX2'))
-        y2 = float(request.POST.get('coordY2'))
-        canvas_width = float(request.POST.get('canvas_width'))
-        canvas_height = float(request.POST.get('canvas_height'))
-        my_coords = [x1,y1,x2,y2]
-        my_model.img_test_coords = my_coords
+    my_model.save()
 
-        #update counter
-        my_model.config = "{'c':2}"
-        my_model.save()
+    header = 'Control Array'
+    context = {'my_model':my_model,'img':my_model.img_con,'header':header,
+                'x1':''.join([str(round(x1*canvas_width)),'px']),
+                'y1':''.join([str(round(y1*canvas_height)),'px']),
+                'my_width':''.join([str(round((x2-x1)*canvas_width)),'px']),
+                'my_height':''.join([str(round((y2-y1)*canvas_height)),'px'])
+                }
 
-        header = 'Control Array'
-        context = {'my_model':my_model,'img':my_model.img_con,'header':header,
-                    'x1':''.join([str(round(x1*canvas_width)),'px']),
-                    'y1':''.join([str(round(y1*canvas_height)),'px']),
-                    'my_width':''.join([str(round((x2-x1)*canvas_width)),'px']),
-                    'my_height':''.join([str(round((y2-y1)*canvas_height)),'px'])
-                    }
+    return render(request, 'app/grid_con.html',context) 
 
-        return render(request, 'app/grid_preset.html',context) 
 
-    elif c == 2:
-        #save coords
-        x1 = float(request.POST.get('coordX1'))
-        y1 = float(request.POST.get('coordY1'))
-        x2 = float(request.POST.get('coordX2'))
-        y2 = float(request.POST.get('coordY2'))
-        my_coords = [x1,y1,x2,y2]
-        my_model.img_con_coords = my_coords
+def grid_vis(request):
+    my_model = gridModel.objects.all().order_by('-id')[0]
+    #save coords
+    x1 = float(request.POST.get('coordX1'))
+    y1 = float(request.POST.get('coordY1'))
+    x2 = float(request.POST.get('coordX2'))
+    y2 = float(request.POST.get('coordY2'))
+    my_coords = [x1,y1,x2,y2]
+    my_model.img_con_coords = my_coords
+    my_model.save()
 
-        #update counter
-        my_model.config = "{'c':3}"
-        my_model.save()
-
-        #If vis is EMPTY then skip to download
-        my_string = my_model.img_vis.name
-        last_slash_index = my_string.rindex('/')
-        if my_string[last_slash_index + 1:] =='EMPTY.jpg':
-            #skip vis
-            return redirect('app:grid_result')
-        else:
-            #return to grid for uv
-            header = 'UV/Vis Control Array'
-            context = {'my_model':my_model,'img':my_model.img_vis,'header':header}
-            return render(request, 'app/grid.html',context) 
-
-    elif c == 3:
-        x1 = float(request.POST.get('coordX1'))
-        y1 = float(request.POST.get('coordY1'))
-        x2 = float(request.POST.get('coordX2'))
-        y2 = float(request.POST.get('coordY2'))
-        my_coords = [x1,y1,x2,y2]
-        my_model.img_vis_coords = my_coords
-        my_model.save()
-        
+    #If vis is EMPTY then skip to download
+    my_string = my_model.img_vis.name
+    last_slash_index = my_string.rindex('/')
+    if my_string[last_slash_index + 1:] =='EMPTY.jpg':
+        #skip vis
         return redirect('app:grid_result')
+    else:
+        #return to grid for uv
+        header = 'UV/Vis Control Array'
+        context = {'my_model':my_model,'img':my_model.img_vis,'header':header}
+        return render(request, 'app/grid_vis.html',context) 
+
+
+def grid_vis_after(request):
+    my_model = gridModel.objects.all().order_by('-id')[0]
+    x1 = float(request.POST.get('coordX1'))
+    y1 = float(request.POST.get('coordY1'))
+    x2 = float(request.POST.get('coordX2'))
+    y2 = float(request.POST.get('coordY2'))
+    #test if grid was drawn
+    if x1 == x2:
+        header = 'UV/Vis Control Array'
+        context = {'my_model':my_model,'img':my_model.img_vis,'header':header}
+        return render(request, 'app/grid_vis.html',context) 
+    my_coords = [x1,y1,x2,y2]
+    my_model.img_vis_coords = my_coords
+    my_model.save()
+    
+    return redirect('app:grid_result')
+
+
+
+
+
+
+
 
 
 
