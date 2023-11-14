@@ -87,6 +87,7 @@ def validate(request):
         return render(request, 'app/request.html',args)
 
     #convert strip_request to usable list
+    my_model.strip_request_string = my_model.strip_request
     my_model.strip_request = strip_number(my_model.strip_request,my_model.first_col)
     my_model.save()
 
@@ -95,6 +96,7 @@ def validate(request):
     my_model.graph_types_string = my_string
     my_string.replace(' ','')
     my_list = my_string.split(',')
+
     my_model.graph_types = my_list
     #format graph types if discovery array - y axes need to be kept the same if discovery array
     if 'd' in my_list:
@@ -103,10 +105,16 @@ def validate(request):
             new_list.append('d')
         my_model.graph_types = new_list
     my_model.save()
+    print(my_model.graph_types)
+    print('^GRAPH TYPES')
 
     #make context for graph types template
     my_list = my_model.strip_request_string.split(',')
+    print(my_model.strip_request)
+    print('^STRIP REQUEST')
     print(my_list)
+    print('^MY LIST')
+
 
     #generate grid file
     rows = 20
