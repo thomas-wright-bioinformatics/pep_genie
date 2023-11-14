@@ -390,7 +390,7 @@ def make_pptx(test_list, graph_type_list,strip_request,user_dir,user_id,vis_bool
             text_left_factor = Cm(1.1)
             text_top_factor = Cm(0)
 
-        elif graph_type_list[i] == 'v': 
+        elif graph_type_list[i] == 'v': #vertical bars
             width = long
             height = short
             left = Cm(9.5) #one cm before
@@ -427,20 +427,20 @@ def make_pptx(test_list, graph_type_list,strip_request,user_dir,user_id,vis_bool
 
 
         #add labels for strips
-        txBox = slide.shapes.add_textbox(text_left, text_top, text_width, text_height)
+        txBox = slide.shapes.add_textbox(text_left, text_top+text_top_factor, text_width, text_height)
         tf = txBox.text_frame
         tf.text = "Control"
         txBox.rotation = text_rotation
         txBox.text_frame.paragraphs[0].alignment = text_align
         
-        txBox2 = slide.shapes.add_textbox(text_left+text_left_factor, text_top+text_top_factor, text_width, text_height)
+        txBox2 = slide.shapes.add_textbox(text_left+text_left_factor, text_top, text_width, text_height)
         tf2 = txBox2.text_frame
         tf2.text = "Overlay"
         txBox2.rotation = text_rotation
         txBox2.text_frame.paragraphs[0].alignment = text_align
 
         if vis_bool == True:
-            txBox3 = slide.shapes.add_textbox(text_left+text_left_factor*(-1), text_top+text_top_factor*(-1), text_width, text_height)
+            txBox3 = slide.shapes.add_textbox(text_left+text_left_factor*(-1), text_top+text_top_factor*(2), text_width, text_height)
             tf3 = txBox3.text_frame
             tf3.text = "UV/Vis"
             txBox3.rotation = text_rotation
