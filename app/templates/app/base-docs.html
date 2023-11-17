@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Pep Genie</title>
+        
+    </head>
+    
+    <body style='margin:0;'>
+
+        <div class='hero' style="position:fixed; width:100vw; height:100vh; 
+        background-image: radial-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), 
+        url('{% static 'app/img/neon-letters.jpg' %}'); background-size:cover;">
+            
+            <div class='nav' style='display:flex; justify-content:center; align-items:center; 
+            width:100%; height:8vh;background: linear-gradient(to right, rgba(255, 255, 255, 0.2), 
+            rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.2));;'>
+                <a href="{% url 'app:index' %}">
+                    <img class='baillie-logo' style='width:130px;'src="{% static 'app/img/logo.jpg' %}">
+                </a>            
+            </div>
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        
+
+
+
+
+    </body>
+
+
+</html>

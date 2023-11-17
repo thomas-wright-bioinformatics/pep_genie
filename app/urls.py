@@ -16,5 +16,7 @@ urlpatterns = [
     path('grid_result',views.grid_result, name = 'grid_result'),
     path('file_download',views.file_download, name = 'file_download'),
     path('ss_form',views.ss_form, name = 'ss_form'),
-    path('ss_result',views.ss_result, name = 'ss_result')
+    path('ss_result',views.ss_result, name = 'ss_result'),
+    path('documentation',views.documentation, name = 'documentation'),
+    path('tutorial',views.tutorial, name = 'tutorial')
 ]

@@ -774,3 +774,13 @@ def ss_result(request):
             res += '\n'
             res += '\n'
     return render(request, "app/ss_result.html", {"result":res})
+
+
+
+
+
+def documentation(request):
+    return render(request, 'app/documentation.html',{})
+
+def tutorial(request):
+    return render(request, 'app/tutorial.html',{})

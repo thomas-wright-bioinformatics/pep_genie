@@ -6,7 +6,7 @@
 
     <div class='title' style='color:white; text-align:center; height: 20vh;'>   
         <h1 style='font-size:64pt; margin:0'>The Pep Genie</h1>
-        <p style='font-size:12pt;'>Version 4.2: Sashimi</p>
+        <p style='font-size:12pt;'>Version 4.3: Nori</p>
     </div>
 
     <div class='menu'>
@@ -15,6 +15,18 @@
         </a>
         <a href="{% url 'app:ss_form' %}">
             <button type='button'><span></span>Alanine Scan and Truncations</button>
+        </a>
+    </div>
+
+    <div style='display: flex'>
+        <a href="{% url 'app:tutorial' %}">
+            <button type='button'><span></span>Tutorial</button>
+        </a>
+        <a href="{% url 'app:documentation' %}">
+            <button type='button'><span></span>Documentation</button>
+        </a>
+        <a href="https://github.com/thomas-wright-bioinformatics/pep_genie">
+            <button type='button'><span></span>GitHub</button>
         </a>
     </div>
 

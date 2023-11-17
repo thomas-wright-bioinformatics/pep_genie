@@ -1,0 +1,161 @@
+{% extends 'app/base-docs.html' %}
+{% load static %}
+{% block content %}
+
+
+
+    <style>
+        li{
+            font-size:14pt;
+            line-height: 1.3;
+        }
+        h2{
+            font-size: 20pt;
+            margin-top: 7vh;
+        }
+    </style>
+
+
+
+    <div style='position: absolute; background: white; width:90%; height:75vh; top: 10vh;     left: 50%;
+    transform: translateX(-50%); overflow-y:scroll;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.7), 
+            rgba(255, 255, 255, 1),rgba(255, 255, 255, 1),rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), 
+            rgba(255, 255, 255, 0.7));
+            border-radius:25px; 
+            padding:5vw;'>
+  
+        <h1 style='padding-top: 0; margin-top:0;'> The Pep Genie - Full Tutorial </h1>
+
+        <div style='display:flex; justify-content: space-between;'>
+            <div>
+                <h2 style='margin-top: 4vh;'>Full Tutorial</h1>
+                <iframe src="https://player.vimeo.com/video/884793004?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479" 
+                width="540" height="303" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" title="The Pep Genie - Full Tutorial"
+                style='display: inline;'></iframe>
+            </div>
+
+            <div>
+                <h2 style='margin-top: 4vh;'>Quick Tutorial</h1>
+                <iframe src="https://player.vimeo.com/video/884805385?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479"
+                width="540" height="303" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" title="The Pep Genie - Quick Tutorial"
+                style='display: inline;'></iframe>
+            </div>
+        </div>
+
+        <div style='width:70%; margin:auto'>
+
+            <br>
+
+            <h2 style='margin-top: 4vh;'>1) Before you start</h2>
+            <ul>
+                <li>You will need the following files:</li>
+                <ul>
+                    <li>Peptide array image of control and test arrays (your image of peptide array binding, these may be one file if imaged together)</li>
+                    <li>The UV/Vis control (image to confirm the presence of peptide on the array)</li>
+                    <li>PEP file or sequence file (Excel or CSV file describing the sequences at each spot on the array)</li>
+                </ul>
+            </ul>
+
+            <h2>2) Preparing your images</h2>
+            <ul>
+                <li>For your peptide array images and UV/Vis control, it is important that the grid of spots is perfectly straight and not at an angle. This allows The Pep Genie to vertically align the spots properly in the figures.</li>
+                <li>If the grid of spots is not straight, you can use the following software to rotate and save the images:</li>
+                <ul>
+                    <li>Apple Photos (Edit tab, then crop tab. Choose your rotation. File -> export)</li>
+                    <li>IntranView for Windows (image -> Custom/Fine rotation…)</li>
+                    <li>GIMP or Photoshop also work</li>
+                </ul>
+                <li>Make sure to export your rotated images as a jpg or png.</li>
+                <li>For the UV/Vis control, you may want to desaturate the image and adjust the brightness or contrast so the spots are more visible.</li>
+            </ul>
+
+
+            <h2>3) Understanding the Layout of Peptide Arrays</h2>
+            <ul>
+                <li>Peptide array synthesisers describe the peptide grid by using letters for rows and numbers for columns. For example, the first and last spots in column 1 are A01 and T01 respectively. There is a maximum of 20 peptide spots per column (A to T).</li>
+                <li>This is how the peptide spots and their sequences are described in the PEP file.</li>
+            </ul>
+
+            <h2>4) Setting up the Form Page</h2>
+            <ul>
+                <li>With your files ready, navigate to The Pep Genie website and go to the ‘Peptide Array Analysis’ page.</li>
+                <li>First, upload your binding image for the test and control arrays. If the two arrays are imaged on the same file, upload that file for both.</li>
+                <li>Tick the box if you want to include the UV/Vis control in your figures. This is recommended. Upload your file for this.</li>
+                <li>Number of columns in Array: Find your sequences in the PEP file. Here you can see the spot name and its sequence. Determine how many columns are in your array. For example, if your first spot is A03, and your last spot is H08, there are six columns (3-8).</li>
+                <li>Number of First Column: Find the column number of your first spot. For example, the column number would be 3 for A03.</li>
+                <li>Enter Your Desired Strips: Here you tell The Pep Genie which spots you want shown in the figures.</li>
+                <li>Example 1: If your array contains an alanine scan and truncations for the N terminus, C terminus, and N+C termini together, then you would enter four commands.</li>
+                <ul>
+                <li>Find the first and last spots of each part. For example:</li>
+                <li>Alanine scan: A03-T03</li>
+                <li>N truncations: A04-T04</li>
+                <li>C truncations: A05-T05</li>
+                <li>N+C truncations: A06-T06</li>
+                <li>You would then enter the following into that field on the website: A03-T03, A04-T04, A05-T05, A06-T06</li>
+                </ul>
+                <li>Example 2: If your array spans a continuous protein sequence for binding site determination, then you should divide your spots up into columns of no more than 20. This allows the figures to nicely into presentations or documents.</li>
+                <ul>
+                <li>Divide your spots into columns of 20. For example, if your array starts at A03 and ends at T06, you would enter the following:</li>
+                <li>A03-T03, A04-T04, A05-T05, A06-T06</li>
+                </ul>
+                <li>Click Submit</li>
+            </ul>
+
+            <h2>5) Selecting Graph Types</h2>
+            <ul>
+                <li>Icons should now show up for each of your desired spot strips.</li>
+                <li>Choose the icon for each with the orientation of the graph that you would like for each image.</li>
+                <li>For binding site arrays, truncation arrays, or point substitution arrays, select the vertical spots and horizontal bars icon.</li>
+                <li>For alanine scan arrays, select the horizontal spots and vertical bars icon.</li>
+                <li>Click Submit</li>
+                <li>If all arrays are vertical, you can choose to set all y-axes to have the same limits. This can be useful when you want to compare between figures.</li>
+            </ul>
+
+
+            <h2>6) Grid Drawing: Test Array</h2>
+            <ul>
+                <li>Once the image of your peptide array loads, you will draw a grid over the image. This grid allows The Pep Genie to measure spots and make the spot figure images.</li>
+                <li>Click once at the top left of your grid.</li>
+                <li>Move the mouse to the bottom right of your spots and click.</li>
+                <li>You can now click and drag to move the whole array, or scale the array by clicking and dragging the blue box at the bottom right side.</li>
+                <li>Take your time to align your spots nicely.</li>
+            </ul>
+
+            <h2>7) Grid Drawing: Control Array</h2>
+            <ul>
+                <li>The Pep Genie will have preset your grid to the same dimensions as the test array. This can be helpful if your control is on the same image.</li>
+                <li>As before, click and drag to move the whole array, or scale the array by clicking and dragging the blue box at the bottom right side.</li>
+                <li>Your control array may be very faint, but try your best to align the grid.</li>
+            </ul>
+
+            <h2>8) Grid Drawing: UV/Vis Image</h2>
+            <ul>
+                <li>Draw and align the grid just like for the test array and click submit.</li>
+            </ul>
+
+            <h2>9) Download Your Figures</h2>
+            <ul>
+                <li>The files can now be downloaded as a zip file which contains your data in a PowerPoint File, in addition to all of the raw data and graphs used.</li>
+            </ul>
+
+            <h2>10) Adding Sequence Labels to the PowerPoint</h2>
+            <ul>
+                <li>From the PEP file on excel, select all of your sequences from the sequence column and paste them into a new word file as plain text.</li>
+                <li>Change the font to Lucida Console and the line spacing to 1.2 multiple.</li>
+                <li>Edit -> Find and replace, remove the spaces.</li>
+                <li>Next, copy and paste the newly formatted text into your PowerPoint. </li>
+                <li>Set the font to 14pt, and position the text next to your bar chart or spots.</li>
+                <li>For an alanine scan, go back to your word file and use 'find and replace' to remove the dashes.</li>
+                <li>Next, paste the control sequence into your PowerPoint file. Set the fontsize to 12.</li>
+                <li>Set character spacing: highlight the sequence, right click -> font...</li>
+                <li>Go to the character spacing tab and set the spacing to 13pt.</li>
+            </ul>
+        </div>
+
+
+    </div>
+
+
+
+{% endblock %}
