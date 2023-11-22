@@ -1,5 +1,5 @@
 ---
-title: 'The Pep Genie: Swift Automation of Peptide Array Data Analysis Through a Django Web Application'
+title: 'The Pep Genie: a Django Application for Swift Automation of Peptide Array Data Analysis'
 tags:
   - Python
   - peptides
