@@ -67,11 +67,14 @@ Many thanks to Dr. Jiayue Ling (Joyce) for her testing, feedback, and keen suppo
 
 # References
 
-Amartely, H., Iosub-Amir, A., Friedler, A., 2014. Identifying Protein-protein Interaction Sites Using Peptide Arrays. JoVE 52097. https://doi.org/10.3791/52097
+Amartely, H., Iosub-Amir, A., Friedler, A., 2014. Identifying Protein-protein Interaction Sites Using Peptide Arrays. Journal of Visualized Experiments 52097. https://doi.org/10.3791/52097
 
-Katz, C., Levy-Beladev, L., Rotem-Bamberger, S., Rito, T., Rüdiger, S.G.D., Friedler, A., 2011. Studying protein–protein interactions using peptide arrays. Chem. Soc. Rev. 40, 2131. https://doi.org/10.1039/c0cs00029a
+Katz, C., Levy-Beladev, L., Rotem-Bamberger, S., Rito, T., Rüdiger, S.G.D., Friedler, A., 2011. Studying protein–protein interactions using peptide arrays. Chemical Society Reviews. 40, 2131. https://doi.org/10.1039/c0cs00029a
 
-Schindelin, J., Arganda-Carreras, I., Frise, E., Kaynig, V., Longair, M., Pietzsch, T., Preibisch, S., Rueden, C., Saalfeld, S., Schmid, B., Tinevez, J.-Y., White, D.J., Hartenstein, V., Eliceiri, K., Tomancak, P., Cardona, A., 2012. Fiji: an open-source platform for biological-image analysis. Nat Methods 9, 676–682. https://doi.org/10.1038/nmeth.2019
+Schindelin, J., Arganda-Carreras, I., Frise, E., Kaynig, V., Longair, M., Pietzsch, T., Preibisch, S., Rueden, C., Saalfeld, S., Schmid, B., Tinevez, J.-Y., White, D.J., Hartenstein, V., Eliceiri, K., Tomancak, P., Cardona, A., 2012. Fiji: an open-source platform for biological-image analysis. Nature Methods 9, 676–682. https://doi.org/10.1038/nmeth.2019
 
 Tibbo, A.J., Mika, D., Dobi, S., Ling, J., McFall, A., Tejeda, G.S., Blair, C., MacLeod, R., MacQuaide, N., Gök, C., Fuller, W., Smith, B.O., Smith, G.L., Vandecasteele, G., Brand, T., Baillie, G.S., 2022. Phosphodiesterase type 4 anchoring regulates cAMP signaling to Popeye domain-containing proteins. Journal of Molecular and Cellular Cardiology 165, 86–102. https://doi.org/10.1016/j.yjmcc.2022.01.001
+
+
+
 
