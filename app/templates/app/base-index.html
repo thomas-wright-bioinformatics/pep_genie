@@ -1,3 +1,24 @@
+<!--
+
+Copyright 2023, Thomas Wright
+
+LICENSE NOTICE
+This file is part of The Pep Genie.
+The Pep Genie is free software: 
+you can redistribute it and/or modify it under the terms of the 
+GNU General Public License as published by the Free Software Foundation, 
+either version 3 of the License, or (at your option) any later version.
+The Pep Genie is distributed in the hope that it will be useful, 
+but WITHOUT ANY WARRANTY; without even the implied warranty of 
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along with The Pep Genie.
+If not, see <https://www.gnu.org/licenses/>. 
+
+
+-->
+
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -24,6 +45,31 @@
             display:flex; flex-direction:column; justify-content: space-around; align-items:center;'>
                 {% block content %}{% endblock %}
             </div>
+        </div>
+
+        <div style='
+        width:auto;
+        height:180px;
+        display:flex;
+        flex-direction:column;
+        justify-content:space-between;
+        position:absolute;
+        right:30px;
+        top:12vh;
+        '>
+            <div class=''>
+                <img src="{% static '/app/img/uofg_logo.png'%}" style='width:180px' id="" alt="">
+            </div>
+
+            <div class=''>
+                <img src="{% static '/app/img/gplv3 logo.png'%}" style='width:180px' id="" alt="">
+            </div>
+    
+        </div>
+
+        <div style='position:absolute; bottom:15px;
+        right:15px;color:grey;'>
+            <h5 style='margin:0;'>Copyright 2023, Thomas Wright</h3>
         </div>
         
 
