@@ -28,7 +28,7 @@ bibliography: paper.bib
 
 The Pep Genie is a Django based website application that simplifies and speeds up the data analysis of peptide arrays. 
 
-Peptide array screening is a method for analysing peptide binding against target proteins [@katz_studying_2011][@amartely_identifying_2014]. Peptides arrays are small peptide libraries synthesised as a grid of spots on a membrane. Binding of an overlaid target is determined by immunodetection, resulting in a grid of binding spot signals.
+Peptide array screening is a method for analysing peptide binding against target proteins [@katz_studying_2011; @amartely_identifying_2014]. Peptides arrays are small peptide libraries synthesised as a grid of spots on a membrane. Binding of an overlaid target is determined by immunodetection, resulting in a grid of binding spot signals [@tibbo_phosphodiesterase_2022].
 
 Peptide arrays are analysed by measuring spot intensity and slicing spot images (Figure 1). 
 Done manually, this is a lengthy and painstaking process. 
@@ -66,8 +66,12 @@ In peptide array experiments, a blank image for the control array is desired, as
 Many thanks to Dr. Jiayue Ling (Joyce) for her testing, feedback, and keen support. Huge thanks to my PhD Supervisor Professor George Baillie. 
 
 # References
+
 Amartely, H., Iosub-Amir, A., Friedler, A., 2014. Identifying Protein-protein Interaction Sites Using Peptide Arrays. JoVE 52097. https://doi.org/10.3791/52097
 
 Katz, C., Levy-Beladev, L., Rotem-Bamberger, S., Rito, T., Rüdiger, S.G.D., Friedler, A., 2011. Studying protein–protein interactions using peptide arrays. Chem. Soc. Rev. 40, 2131. https://doi.org/10.1039/c0cs00029a
 
 Schindelin, J., Arganda-Carreras, I., Frise, E., Kaynig, V., Longair, M., Pietzsch, T., Preibisch, S., Rueden, C., Saalfeld, S., Schmid, B., Tinevez, J.-Y., White, D.J., Hartenstein, V., Eliceiri, K., Tomancak, P., Cardona, A., 2012. Fiji: an open-source platform for biological-image analysis. Nat Methods 9, 676–682. https://doi.org/10.1038/nmeth.2019
+
+Tibbo, A.J., Mika, D., Dobi, S., Ling, J., McFall, A., Tejeda, G.S., Blair, C., MacLeod, R., MacQuaide, N., Gök, C., Fuller, W., Smith, B.O., Smith, G.L., Vandecasteele, G., Brand, T., Baillie, G.S., 2022. Phosphodiesterase type 4 anchoring regulates cAMP signaling to Popeye domain-containing proteins. Journal of Molecular and Cellular Cardiology 165, 86–102. https://doi.org/10.1016/j.yjmcc.2022.01.001
+
