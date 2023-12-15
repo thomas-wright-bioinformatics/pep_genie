@@ -162,14 +162,20 @@ def slice_to_list(my_image, rows, cols):
 
 #mask variables
 #width = 200
-def make_mask(width):
-    frac = width / 15
+def make_mask(width, spot_diameter):
+    frac = width * ( (1- (spot_diameter / 100)) / 2)
+    print('spot diameter and width frac')
+    print(spot_diameter)
+    print(frac)
+
 
     #create mask image
     bbox = [frac, frac, width-frac, width-frac]
     mask = Image.new('L', (width, width),0)
     draw = ImageDraw.Draw(mask)
     draw.pieslice(bbox,0,360,fill=255)
+
+    
     return mask
 
 

@@ -393,7 +393,9 @@ def grid_result(request):
         c=0
 
     #crop each image in list and measure darkness
-    mask = make_mask(200)
+    mask = make_mask(200, my_model.measure_diameter)
+
+
     
     #measure darknesses
     darkness_list_img1 = []
@@ -426,7 +428,7 @@ def grid_result(request):
         c=0
 
     #crop each image in list and measure darkness
-    mask = make_mask(200)
+    mask = make_mask(200, my_model.measure_diameter)
     
     #measure darknesses
     darkness_list_img2 = []

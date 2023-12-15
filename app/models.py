@@ -47,6 +47,7 @@ class gridModel(models.Model):
     strip_request = models.CharField(max_length=1000, default='A08-T08,A09-T09')
     graph_types = models.CharField(max_length=1000, default='d')
     strip_request_string = models.CharField(max_length=1000, default='A08-T08,A09-T09')
+    measure_diameter = models.IntegerField(default=70)
     #norm = models.BooleanField(default=False)
 
     img_test = models.FileField(upload_to=fileFormat, validators=[validate_image_file_extension])

@@ -54,13 +54,19 @@ If not, see <https://www.gnu.org/licenses/>.
         {{ form.first_col.label }}
         {{ form.first_col }}<br>
         {{ form.strip_request.label }}
-        {{ form.strip_request }}<br>
+        {{ form.strip_request }}<br><br>
+
+        <h4 style='font-weight:lighter; margin:0px;'>Advanced settings</h4>
+        <div style='padding-left: 20px'>
+          {{ form.measure_diameter.label }}
+          {{ form.measure_diameter }}
+        </div>
 
         <button type="submit" class="">Save</button>
 
     </form>
     <div class='seven-logo'>
-        <img src="{% static '/app/img/george-genie.png'%}" style='width:250px' id="" alt="">
+        <img src="{% static '/app/img/george-genie.png'%}" style='width:200px' id="" alt="">
     </div>
 
 

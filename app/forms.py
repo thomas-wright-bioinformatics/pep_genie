@@ -26,7 +26,7 @@ from django import forms
 class gridModelForm(forms.ModelForm):
     class Meta:
         model = gridModel
-        fields = ('img_test','img_con','img_vis','cols','first_col','strip_request','graph_types')
+        fields = ('img_test','img_con','img_vis','cols','first_col','strip_request','graph_types','measure_diameter')
         labels = {
         "img_test": "1) Test Array Image:",
         "img_con": "2) Control Array Image:",
@@ -35,4 +35,5 @@ class gridModelForm(forms.ModelForm):
         "first_col": "5) Number of First Column:",
         "strip_request": "6) Enter Your Desired Strips:",
         "graph_types": "7) Enter the Type of Graph for Each Strip:",
+        "measure_diameter": "7) Set diameter of spot intensity measurement (%):",
         }
