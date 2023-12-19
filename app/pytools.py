@@ -184,10 +184,21 @@ def make_mask(width, spot_diameter):
 
 def circle_crop(im, mask):
     #crop image to mask
-    cropped = ImageOps.fit(im, mask.size, centering=(0.5, 0.5))
+    im = ImageOps.fit(im, mask.size, centering=(0.5, 0.5))
+    cropped = im.convert('L')
     #add alpha layer to image
     cropped.putalpha(mask)
     #output is RGBA
+
+    #new method
+    #image_array = np.array(im)
+    #mask_array = np.array(mask)
+    #cropped = Image.fromarray(np.dstack((image_array,mask_array)))
+
+    #test
+    #cropped = Image.fromarray(image_array)
+
+
     return cropped
 
 

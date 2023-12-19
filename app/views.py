@@ -381,7 +381,7 @@ def grid_result(request):
     cols = my_model.cols
     slice_list = slice_to_list(img_test_cropped, rows, cols)
 
-    #NEED TO MELT THE SLICE LIST, AS CSV WRITES IN ROWS, NOT COLS
+    #REFORMAT - NEED TO MELT THE SLICE LIST, AS CSV WRITES IN ROWS, NOT COLS
     format_list = []
     c=0
     r=0
@@ -392,23 +392,102 @@ def grid_result(request):
         r+=1
         c=0
 
-    #crop each image in list and measure darkness
-    mask = make_mask(200, my_model.measure_diameter)
 
 
-    
-    #measure darknesses
+
+
+
+    #### Measure darkness ####
     darkness_list_img1 = []
     my_row = []
+
+    #list needed is format_list
+    #images are in format of PIL images
 
     c = 0
     for row in range(rows):
         for col in range(cols):
-            cropped = circle_crop(format_list[c],mask)
-            my_row.append(measure_darkness(cropped))
+            #resize to square in PIL
+            pil = format_list[c]
+            w, h = pil.size
+            my_length = max(w, h) #select longest side
+            pil_square = pil.resize((my_length, my_length))  #make square
+            
+            #to ndarray
+            nd_image = np.array(pil_square)
+
+            #check if greyscale
+            if not (len(nd_image.shape) == 2 or (len(nd_image.shape) == 3 and nd_image.shape[2] == 1)):
+                print("The image is not grayscale.")
+                nd_image_grey = np.dot(nd_image[..., :3], [0.299, 0.587, 0.114])
+            else:
+                print("The image is grayscale.")
+                nd_image_grey = nd_image
+
+            #invert so binding signal is light ->255
+            inverted_array = 255 - nd_image_grey
+
+            #MASK
+            #define circle
+            centre = (my_length/2, my_length/2)
+            radius =  (my_model.measure_diameter / 200) * my_length
+            # Create a grid of coordinates
+            print(nd_image.shape)
+            print(nd_image_grey.shape)
+            print(inverted_array.shape)
+            y, x = np.ogrid[:inverted_array.shape[0], :inverted_array.shape[1]]
+            # Create a mask for pixels inside the circle 
+            mask = (x - centre[0]) ** 2 + (y - centre[1]) ** 2 <= radius ** 2
+
+            # TEST Change pixels outside the circle to white (255)
+            #masked_array[~mask] = 255 #mask test, overlay white outside
+
+            #apply mask to filter only inside pixels
+            pixels_inside_circle = inverted_array[mask]
+            #measure
+            my_row.append(np.mean(pixels_inside_circle))
+
+            #print intensity for testing
+            print('row' + str(row) + 'col' + str(col) +'_'+ str(c) + 'spot.png')
+            print(
+                np.mean(pixels_inside_circle),
+                np.mean(inverted_array)
+            )
+            
+            ''' save mask cropped image for testing 
+            #overlay mask for test
+            masked_array = np.zeros_like(inverted_array)
+            masked_array[mask] = inverted_array[mask]
+
+            #export
+            masked_array = Image.fromarray(masked_array)
+            masked_array = masked_array.convert('L')
+        
+            def save_image_to_media(image):
+                # Generate a unique filename or use your own logic
+                filename = 'row' + str(row) + 'col' + str(col) + str(c) + 'spot.png'
+                file_path = os.path.join(media_root, filename)
+                # Save the PIL image to the specified file path
+                #image = image.convert('RGB')
+                image.save(file_path)
+
+                # Generate a unique filename or use your own logic
+                filename = 'row' + str(row) + 'col' + str(col) + str(c) + 'oldspot.png'
+                file_path = os.path.join(media_root, filename)
+                # Save the PIL image to the specified file path
+                james  = format_list[c]
+                #james = james.convert('RGB')
+                james.save(file_path)
+
+            save_image_to_media(masked_array)
+            '''  
             c += 1
         darkness_list_img1.append(my_row)
         my_row = []
+
+
+
+
 
 
     #get darkness list of img2
@@ -427,21 +506,64 @@ def grid_result(request):
         r+=1
         c=0
 
-    #crop each image in list and measure darkness
-    mask = make_mask(200, my_model.measure_diameter)
-    
-    #measure darknesses
+
+
+
+    #### Measure darkness CONTROL ####
     darkness_list_img2 = []
     my_row = []
+
+    #list needed is format_list
+    #images are in format of PIL images
 
     c = 0
     for row in range(rows):
         for col in range(cols):
-            cropped = circle_crop(format_list[c],mask)
-            my_row.append(measure_darkness(cropped))
+            #resize to square in PIL
+            pil = format_list[c]
+            w, h = pil.size
+            my_length = max(w, h) #select longest side
+            pil_square = pil.resize((my_length, my_length))  #make square
+            
+            #to ndarray
+            nd_image = np.array(pil_square)
+
+            #check if greyscale
+            if not (len(nd_image.shape) == 2 or (len(nd_image.shape) == 3 and nd_image.shape[2] == 1)):
+                print("The image is not grayscale.")
+                nd_image_grey = np.dot(nd_image[..., :3], [0.299, 0.587, 0.114])
+            else:
+                print("The image is grayscale.")
+                nd_image_grey = nd_image
+
+            #invert so binding signal is light ->255
+            inverted_array = 255 - nd_image_grey
+
+            #MASK
+            #define circle
+            centre = (my_length/2, my_length/2)
+            radius =  (my_model.measure_diameter / 200) * my_length
+            # Create a grid of coordinates
+            y, x = np.ogrid[:inverted_array.shape[0], :inverted_array.shape[1]]
+            # Create a mask for pixels inside the circle 
+            mask = (x - centre[0]) ** 2 + (y - centre[1]) ** 2 <= radius ** 2
+
+            # TEST Change pixels outside the circle to white (255)
+            #masked_array[~mask] = 255 #mask test, overlay white outside
+
+            #apply mask to filter only inside pixels
+            pixels_inside_circle = inverted_array[mask]
+            #measure
+            my_row.append(np.mean(pixels_inside_circle))
+
             c += 1
         darkness_list_img2.append(my_row)
         my_row = []
+
+
+
+
+
 
 
     #calculate min, max and delta for darkness transformation
@@ -460,31 +582,36 @@ def grid_result(request):
     #transform data so that values increase from light to dark
     darkness_list_img_1_trn = []
     my_row = []
-    for row in range(rows):
+    #new system doesn't need inversion
+    '''for row in range(rows):
         for col in range(cols):
             #invert value while retaining distance from 0
             my_row.append(
                 ((1-((darkness_list_img1[row][col]-my_min)/my_delta))*my_delta)+my_min
             )
         darkness_list_img_1_trn.append(my_row)
-        my_row = []
-
+        my_row = []'''
+    darkness_list_img_1_trn = darkness_list_img1
     #export for making graphs
     #if norm = false, then this will be fed to graph
     my_model.dens_list = darkness_list_img_1_trn
+    #my_model.dens_list = darkness_list_img1 #testing for raw ########
     my_model.save()
+
+
 
     darkness_list_img_2_trn = []
     my_row = []
-    for row in range(rows):
+    #new system doesn't need inversion
+    '''for row in range(rows):
         for col in range(cols):
             #invert value while retaining distance from 0
             my_row.append(
                 ((1-((darkness_list_img2[row][col]-my_min)/my_delta))*my_delta)+my_min
             )
         darkness_list_img_2_trn.append(my_row)
-        my_row = []
-
+        my_row = []'''
+    darkness_list_img_2_trn = darkness_list_img2
 
     #save test image darknesses
     path_name = os.path.join(MEDIA_ROOT,'sd') #!!!!!!!!!!!!!! Python anywhere problem
@@ -585,6 +712,7 @@ def grid_result(request):
 
     ### GRAPHS ###
     dens_list = my_model.dens_list
+    #dens_list = darkness_list_img1  ##### testing
     #convert dens_list which is in array format to flat list of intensities to match strip_request indices
     dens_list_flat = []
     for col in range(cols):
